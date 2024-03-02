@@ -37,9 +37,10 @@ namespace DevoraLimeArena.Shared.Tests
                 [new Fighter(), new Fighter(), 120, isNotSuddenDeath ? 60 : 0],
             ];
         }
+        private static int deadHasBeenCalledNTimes = 0;
 
         [TearDown]
-        public void TearDown() { Champion.SuddenDeath = false; }
+        public void TearDown() { Champion.SuddenDeath = false; deadHasBeenCalledNTimes = 0; }
 
         [TestCaseSource(nameof(maxHpTestCaseSource))]
         public void ChampionsShouldStartWithTheirMaxHp(Champion champion, int maxHp)
@@ -57,6 +58,16 @@ namespace DevoraLimeArena.Shared.Tests
             champion.TakeDmg();
             champion.Rest();
             Assert.That(champion.Hp, Is.EqualTo(wantedHp));
+        }
+        [TestCaseSource(nameof(maxHpTestCaseSource))]
+        public void ChampionsShouldNotHaveMoreHpThanMaxAfterRest(Champion champion, int maxHp)
+        {
+            champion.Rest();
+            champion.Rest();
+            champion.Rest();
+            champion.Rest();
+            champion.Rest();
+            Assert.That(champion.Hp, Is.EqualTo(maxHp));
         }
 
         [TestCaseSource(nameof(nameTestCaseSource))]
@@ -80,12 +91,25 @@ namespace DevoraLimeArena.Shared.Tests
         public void CorrectChampionShouldDieInASuddenDeathFight(Champion attacker, Champion defender, int attackerEndHp, int defenderEndHp)
         {
             Champion.SuddenDeath = true;
+            attacker.ChampionDied += ChampionDied;
+            defender.ChampionDied += ChampionDied;
             defender.Fight(attacker);
             Assert.Multiple(() =>
             {
                 Assert.That(attacker.Hp, Is.EqualTo(attackerEndHp));
                 Assert.That(defender.Hp, Is.EqualTo(defenderEndHp));
+                if (attackerEndHp == 0 || defenderEndHp == 0)
+                    Assert.That(deadHasBeenCalledNTimes, Is.EqualTo(1));
             });
+        }
+
+        private void ChampionDied(object? sender, EventArgs e)
+        {
+            if (sender is Champion deadOne)
+            {
+                Assert.That(deadOne.Hp, Is.EqualTo(0));
+                deadHasBeenCalledNTimes++;
+            }
         }
     }
 
