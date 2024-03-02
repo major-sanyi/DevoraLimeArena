@@ -26,6 +26,10 @@ namespace DevoraLimeArena.Shared.Models
         /// <param name="N">The size of arena.</param>
         public Arena(int N = CommonProperties.DefaultArenaSize)
         {
+            if (N < 2)
+            {
+                throw new ArgumentException("Arena should contain at least 2 heros");
+            }
             for (int i = 0; i < N; i++)
             {
                 Champion champion = CommonProperties.Rnd.Next(3) switch
@@ -35,6 +39,7 @@ namespace DevoraLimeArena.Shared.Models
                     _ => new Archer(),
                 };
                 champion.ChampionDied += Champion_ChampionDied;
+                Champions.Add(champion);
             }
         }
 
@@ -54,11 +59,11 @@ namespace DevoraLimeArena.Shared.Models
                 }
 
                 // Prepare
-                (int AttackerHp, int DefenderHp) HpBeforeBattle = (attacker.Hp, defender.Hp);
+                AttackerDefenderHp HpBeforeBattle = new(attacker.Hp, defender.Hp);
 
                 // Fight
                 defender.Fight(attacker);
-                Fights.Add(new Fight(attacker, defender, HpBeforeBattle, (attacker.Hp, defender.Hp)));
+                Fights.Add(new Fight(attacker, defender, HpBeforeBattle, new(attacker.Hp, defender.Hp)));
             }
         }
         private void Champion_ChampionDied(object? sender, EventArgs e)

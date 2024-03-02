@@ -9,5 +9,7 @@ namespace DevoraLimeArena.Shared.Services
     /// <param name="Defender">The champion who was attacked.</param>
     /// <param name="StartingHp">HPs before the battle.</param>
     /// <param name="EndingHp">HPs After the battle.</param>
-    public record Fight(Champion Attacker, Champion Defender, (int attackerHp, int defenderHp) StartingHp, (int attackerHp, int defenderHp) EndingHp);
+    public record Fight(Champion Attacker, Champion Defender, AttackerDefenderHp StartingHp, AttackerDefenderHp EndingHp);
+
+    public record AttackerDefenderHp(int AttackerHp, int DefenderHp);
 }
