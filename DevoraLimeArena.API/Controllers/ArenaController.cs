@@ -5,28 +5,20 @@ namespace DevoraLimeArena.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ArenaController : ControllerBase
+    public class ArenaController(IArenaWarService arenaWarService) : ControllerBase
     {
-
-        private readonly ILogger<ArenaController> _logger;
-        private readonly IArenaWarService _arenaWarService;
-
-        public ArenaController(ILogger<ArenaController> logger, IArenaWarService arenaWarService)
+        [HttpPost]
+        [Route("CreateArena")]
+        public Guid CreateArena(int N)
         {
-            _logger = logger;
-            _arenaWarService = arenaWarService;
+            return arenaWarService.CreateArena(N);
         }
 
-        [HttpPost(Name = "CreateArena")]
-        public Guid CreateArena()
-        {
-            return _arenaWarService.CreateArena();
-        }
-
-        [HttpGet(Name = "GetArenaFights")]
+        [HttpGet]
+        [Route("GetArenaFights")]
         public async Task<List<Fight>> GetArenaFights(Guid arenaId)
         {
-            return await _arenaWarService.GetArenaFights(arenaId);
+            return await arenaWarService.GetArenaFights(arenaId);
         }
     }
 }

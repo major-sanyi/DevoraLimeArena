@@ -62,7 +62,7 @@ namespace DevoraLimeArena.Shared.Tests
         [TestCaseSource(nameof(nameTestCaseSource))]
         public void ChampionShouldHaveCorrectName(Champion champion, string name)
         {
-            Assert.That(champion.ToString(), Does.StartWith(name));
+            Assert.That(champion.Name, Does.StartWith(name));
         }
 
         [TestCaseSource(nameof(fightTestCaseSource))]
@@ -89,14 +89,14 @@ namespace DevoraLimeArena.Shared.Tests
         }
     }
 
-    public class KnightLives() : Random
+    internal class KnightLives() : Random
     {
         public override int Next(int maxValue)
         {
             return 6;
         }
     }
-    public class KnightDies() : Random
+    internal class KnightDies() : Random
     {
         public override int Next(int maxValue)
         {

@@ -23,16 +23,20 @@ namespace DevoraLimeArena.Shared.Models
         /// </summary>
         public List<Fight> Fights { get; } = [];
 
+        private readonly Random randomGenerator;
+
         /// <param name="N">The size of arena.</param>
-        public Arena(int N = CommonProperties.DefaultArenaSize)
+        /// <param name="randomGenerator">Random generator for luck based encounters.</param>
+        public Arena(int N = CommonProperties.DefaultArenaSize, Random? randomGenerator = null)
         {
+            this.randomGenerator = randomGenerator ?? CommonProperties.Rnd;
             if (N < 2)
             {
                 throw new ArgumentException("Arena should contain at least 2 heros");
             }
             for (int i = 0; i < N; i++)
             {
-                Champion champion = CommonProperties.Rnd.Next(3) switch
+                Champion champion = this.randomGenerator.Next(3) switch
                 {
                     1 => new Fighter(),
                     2 => new Knight(),
@@ -51,11 +55,11 @@ namespace DevoraLimeArena.Shared.Models
             while (Champions.Count > 1)
             {
                 //Select 2 separate champs random
-                Champion attacker = Champions.ElementAt(CommonProperties.Rnd.Next(Champions.Count));
-                Champion defender = Champions.ElementAt(CommonProperties.Rnd.Next(Champions.Count)); ;
+                Champion attacker = Champions.ElementAt(randomGenerator.Next(Champions.Count));
+                Champion defender = Champions.ElementAt(randomGenerator.Next(Champions.Count));
                 while (attacker.Equals(defender))
                 {
-                    defender = Champions.ElementAt(CommonProperties.Rnd.Next(Champions.Count));
+                    defender = Champions.ElementAt(randomGenerator.Next(Champions.Count));
                 }
 
                 // Prepare
@@ -63,9 +67,12 @@ namespace DevoraLimeArena.Shared.Models
 
                 // Fight
                 defender.Fight(attacker);
-                Fights.Add(new Fight(attacker, defender, HpBeforeBattle, new(attacker.Hp, defender.Hp)));
+                // Locks the list on the case when trying to get partial results.
+                Fight currentFight = new(attacker, defender, HpBeforeBattle, new(attacker.Hp, defender.Hp));
+                Fights.Add(currentFight);
             }
         }
+
         private void Champion_ChampionDied(object? sender, EventArgs e)
         {
             if (sender is Champion champ)
