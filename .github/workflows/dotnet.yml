@@ -32,4 +32,4 @@ jobs:
     - name: Pack  Shared
       run: dotnet pack DevoraLimeArena.Shared  --configuration Release
     - name: Publish Shared
-      run: dotnet nuget push DevoraLimeArena.Shared/bin/Release/*.nupkg -k ${{secrets.GITHUB_TOKEN}}
+      run: dotnet nuget push DevoraLimeArena.Shared/bin/Release/*.nupkg -k ${{secrets.GITHUB_TOKEN}} --skip-duplicate
