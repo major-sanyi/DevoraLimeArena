@@ -18,7 +18,7 @@ namespace DevoraLimeArena.Shared.Tests
         [TestCase(5)]
         [TestCase(12)]
         [TestCase(null)]
-        public void ArenaShouldBeCreatedWithorWithoutN(int? N)
+        public void ArenaShouldBeCreated_WithOrWithoutN(int? N)
         {
             Arena arena;
             if (N is not null)
@@ -37,13 +37,13 @@ namespace DevoraLimeArena.Shared.Tests
         [TestCase(1)]
         [TestCase(-2)]
         [TestCase(-32)]
-        public void ArenaShouldThrowErrorOnInvalidN(int N)
+        public void ArenaShouldThrowError_OnInvalidN(int N)
         {
             Assert.Throws<ArgumentException>(() => new Arena(N));
         }
 
         [Test]
-        public void OnlyOneShouldStandAfterFight()
+        public void OnlyOneShouldStand_AfterFight()
         {
             var arena = new Arena();
             arena.FightUntilOneStands();
@@ -55,7 +55,7 @@ namespace DevoraLimeArena.Shared.Tests
         }
 
         [TestCaseSource(nameof(arenaRandomNumberTests))]
-        public void ArenaMatchCorrectlyPlaysOut(int N, int numberOfFights, int[] randomNumbers)
+        public void ArenaMatchShould_CorrectlyPlayOut(int N, int numberOfFights, int[] randomNumbers)
         {
             Champion.SuddenDeath = true;
             ArenaRandomGen random = new()

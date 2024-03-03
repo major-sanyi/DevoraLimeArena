@@ -43,7 +43,7 @@ namespace DevoraLimeArena.Shared.Tests
         public void TearDown() { Champion.SuddenDeath = false; deadHasBeenCalledNTimes = 0; }
 
         [TestCaseSource(nameof(maxHpTestCaseSource))]
-        public void ChampionsShouldStartWithTheirMaxHp(Champion champion, int maxHp)
+        public void ChampionsShouldStart_WithTheirMaxHp(Champion champion, int maxHp)
         {
             Assert.Multiple(() =>
             {
@@ -53,14 +53,14 @@ namespace DevoraLimeArena.Shared.Tests
         }
 
         [TestCaseSource(nameof(restTestCaseSource))]
-        public void ChampionsShouldRegainHpAfterARest(Champion champion, int wantedHp)
+        public void ChampionsShouldRegainHp_AfterARest(Champion champion, int wantedHp)
         {
             champion.TakeDmg();
             champion.Rest();
             Assert.That(champion.Hp, Is.EqualTo(wantedHp));
         }
         [TestCaseSource(nameof(maxHpTestCaseSource))]
-        public void ChampionsShouldNotHaveMoreHpThanMaxAfterRest(Champion champion, int maxHp)
+        public void ChampionsShouldNotHaveMoreHpThan_MaxAfterRest(Champion champion, int maxHp)
         {
             champion.Rest();
             champion.Rest();
@@ -77,7 +77,7 @@ namespace DevoraLimeArena.Shared.Tests
         }
 
         [TestCaseSource(nameof(fightTestCaseSource))]
-        public void CorrectChampionShouldTakeDmgInAFight(Champion attacker, Champion defender, int attackerEndHp, int defenderEndHp)
+        public void CorrectChampionShouldTakeDmg_InAFight(Champion attacker, Champion defender, int attackerEndHp, int defenderEndHp)
         {
             defender.Fight(attacker);
             Assert.Multiple(() =>
@@ -88,7 +88,7 @@ namespace DevoraLimeArena.Shared.Tests
         }
 
         [TestCaseSource(nameof(fightTestCaseSourceWithSuddenDeath))]
-        public void CorrectChampionShouldDieInASuddenDeathFight(Champion attacker, Champion defender, int attackerEndHp, int defenderEndHp)
+        public void CorrectChampionShouldDie_InASuddenDeathFight(Champion attacker, Champion defender, int attackerEndHp, int defenderEndHp)
         {
             Champion.SuddenDeath = true;
             attacker.ChampionDied += ChampionDied;

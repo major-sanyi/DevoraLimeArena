@@ -16,7 +16,6 @@ namespace DevoraLimeArena.Shared.Services
         public Guid CreateArena(int N)
         {
             Arena arena = new(N);
-
             Task task = Task.Run(arena.FightUntilOneStands);
             Arenas.Add(arena, task);
             return arena.Id;
