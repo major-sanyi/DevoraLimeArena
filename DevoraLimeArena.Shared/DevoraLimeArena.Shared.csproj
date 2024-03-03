@@ -3,8 +3,13 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
+	<PackageId>DevoraLimeArena.Shared</PackageId>
+	<Version>1.0.0</Version>
+	<Authors>major-sanyi</Authors>
+	<Company>major-sanyi</Company>
+	<PackageDescription>Shared library for DevoraLimeArena project...</PackageDescription>
+	<RepositoryUrl>https://github.com/major-sanyi/DevoraLimeArena</RepositoryUrl>
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
-
 </Project>

@@ -3,11 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevoraLimeArena.API", "DevoraLimeArena.API\DevoraLimeArena.API.csproj", "{2E3B7270-99DA-40EE-ADF9-AFD8C3B2DE13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevoraLimeArena.API", "DevoraLimeArena.API\DevoraLimeArena.API.csproj", "{2E3B7270-99DA-40EE-ADF9-AFD8C3B2DE13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevoraLimeArena.Shared", "DevoraLimeArena.Shared\DevoraLimeArena.Shared.csproj", "{9763A346-CDBC-4481-A718-3A552CF1FA5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevoraLimeArena.Shared", "DevoraLimeArena.Shared\DevoraLimeArena.Shared.csproj", "{9763A346-CDBC-4481-A718-3A552CF1FA5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevoraLimeArena.Shared.Tests", "DevoraLimeArena.Shared.Tests\DevoraLimeArena.Shared.Tests.csproj", "{680DFC66-9BE2-4CA6-8116-071E276B1D70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevoraLimeArena.Shared.Tests", "DevoraLimeArena.Shared.Tests\DevoraLimeArena.Shared.Tests.csproj", "{680DFC66-9BE2-4CA6-8116-071E276B1D70}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7B6DE99B-5B87-4075-A039-ECA27A8746FF}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
